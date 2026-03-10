@@ -1,0 +1,240 @@
+{
+  "name": "todo-api",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "task",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -304,
+        -48
+      ],
+      "id": "cdee220e-6fde-4de4-bc15-391822fa5f77",
+      "name": "Webhook-create-task",
+      "webhookId": "d91c45a7-62ad-4073-bb5d-680827993b5c"
+    },
+    {
+      "parameters": {
+        "path": "tasks",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -304,
+        96
+      ],
+      "id": "f29f429b-45aa-40e3-9648-83de8df9d233",
+      "name": "Webhook-list-tasks",
+      "webhookId": "692d7c40-657a-4d46-a01f-f64579340763"
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $getWorkflowStaticData('global');\n\nif (!data.tasks) {\n  data.tasks = [];\n}\n\nconst taskText = $json.body.task;\n\nconst newTask = {\n  id: data.tasks.length + 1,\n  task: taskText,\n  done: false\n};\n\ndata.tasks.push(newTask);\n\nreturn [\n{\njson: newTask\n}\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -96,
+        -48
+      ],
+      "id": "55d0341d-b23b-4269-885f-c086df804e48",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        112,
+        -48
+      ],
+      "id": "a2f65d02-f322-4959-983b-d6a13234d1eb",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $getWorkflowStaticData('global');\n\nif (!data.tasks) {\n  data.tasks = [];\n}\n\nreturn [\n{\njson: {\ntasks: data.tasks\n}\n}\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -96,
+        96
+      ],
+      "id": "4cb568c5-28d6-45c4-929d-38ccda0cd745",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        112,
+        96
+      ],
+      "id": "e81c0fa6-8fe8-47c2-948c-9dbaf2014bab",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $getWorkflowStaticData('global');\n\n// garante que a lista existe\nif (!data.tasks) {\n  data.tasks = [];\n}\n\nconst id = $json.body?.id;\n\n// procura a tarefa\nconst task = data.tasks.find(t => t.id === id);\n\nif (!task) {\n  return [\n    {\n      json: {\n        error: \"Task not found\"\n      }\n    }\n  ];\n}\n\ntask.done = true;\n\nreturn [\n  {\n    json: task\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -96,
+        256
+      ],
+      "id": "f948cafa-60a1-494f-9e68-6c54bb948099",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        112,
+        256
+      ],
+      "id": "d0839eca-b941-4002-921e-69fa3be90d77",
+      "name": "Respond to Webhook2"
+    },
+    {
+      "parameters": {
+        "content": "Create-task body:\n{\n\"task\":\"Estudar n8n\"\n}"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -288,
+        -256
+      ],
+      "typeVersion": 1,
+      "id": "5baefc83-3636-4f07-9620-f59fc4a3992d",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "Task-done body:\n{\n\"id\":1\n}"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        -256
+      ],
+      "typeVersion": 1,
+      "id": "51d4797f-7e6a-48e8-8333-3bf846c400c3",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "task/done",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -304,
+        256
+      ],
+      "id": "919cbf11-68bd-46a2-9274-e61f770ee3e3",
+      "name": "Webhook-task-done",
+      "webhookId": "abbb68f0-e70f-4cfc-a53a-acab633b2b6c"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook-create-task": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook-list-tasks": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook-task-done": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "3d38e5e4-e20d-4ae5-98ea-8d7c4d0f4956",
+  "meta": {
+    "instanceId": "34f9105c66527f4f65c6f70d4e0616775ae03e0a7ecbacfcd8926dc5aad1c863"
+  },
+  "id": "s5AscNP93FEe64YN",
+  "tags": []
+}
