@@ -5,7 +5,7 @@ Simple automation that generates a secure random password.
 ## Endpoint
 
 ```
-GET /webhook/password
+POST /webhook/password
 ```
 
 ## Example Response
