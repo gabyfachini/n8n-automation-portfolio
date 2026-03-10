@@ -1,0 +1,84 @@
+{
+  "name": "fake-data-generator - Em Andamento",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "fake-data-generator",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "295cb604-6a60-4d07-b3b7-139a48420168",
+      "name": "Webhook",
+      "webhookId": "62701e3c-045b-4332-bc27-a3018e6d4584"
+    },
+    {
+      "parameters": {
+        "jsCode": "const nomes = [\"Ana\",\"Carlos\",\"Marina\",\"Pedro\"];\nconst cidades = [\"São Paulo\",\"Rio\",\"Curitiba\",\"Recife\"];\n\nreturn [{\nnome: nomes[Math.floor(Math.random()*nomes.length)],\ncidade: cidades[Math.floor(Math.random()*cidades.length)],\nidade: Math.floor(Math.random()*60)+18\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "7e772537-fac2-4773-9a60-f763b29a2edb",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        416,
+        0
+      ],
+      "id": "19661ad2-3740-49da-b79a-b0ecee21d21b",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "ff22b22a-5ce2-45a0-95f4-28a25dcd894b",
+  "meta": {
+    "instanceId": "34f9105c66527f4f65c6f70d4e0616775ae03e0a7ecbacfcd8926dc5aad1c863"
+  },
+  "id": "dPSfhmLmRLWfDQ0I",
+  "tags": []
+}
