@@ -1,0 +1,84 @@
+{
+  "name": "visit-counter",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "visit-counter",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "db0a9ed5-8e53-44b7-95ad-7024dd8440f2",
+      "name": "Webhook",
+      "webhookId": "b11a6e11-bd5f-44ac-b48a-0522cfac1247"
+    },
+    {
+      "parameters": {
+        "jsCode": "const staticData = $getWorkflowStaticData('global');\n\nif (!staticData.visitas) {\n  staticData.visitas = 0;\n}\n\nstaticData.visitas += 1;\n\nreturn [\n  {\n    json: {\n      visitas: staticData.visitas\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "9d8932f3-187f-48f2-9e2c-c10c7a8ca345",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        400,
+        0
+      ],
+      "id": "094eb6a3-b2d0-47f0-a95a-aced0725b519",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "ade3577d-3e81-4821-ab31-350fe1f6a857",
+  "meta": {
+    "instanceId": "34f9105c66527f4f65c6f70d4e0616775ae03e0a7ecbacfcd8926dc5aad1c863"
+  },
+  "id": "JkAhSSqh6z5FD6QJ",
+  "tags": []
+}
