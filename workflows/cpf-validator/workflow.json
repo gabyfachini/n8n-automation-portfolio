@@ -1,0 +1,85 @@
+{
+  "name": "cpf-validator",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cpf-validator",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "6ac25a06-74a9-4c44-be92-a45e95e80d9b",
+      "name": "Webhook",
+      "webhookId": "a0beffff-2cc7-4913-9d5d-06af70a043d4"
+    },
+    {
+      "parameters": {
+        "jsCode": "function validarCPF(cpf) {\n  if (!cpf) return false;\n\n  cpf = cpf.replace(/[^\\d]+/g, '');\n\n  if (cpf.length !== 11) return false;\n\n  return true;\n}\n\nconst cpf = $json.body.cpf;\n\nreturn [\n  {\n    json: {\n      cpf: cpf ?? null,\n      valido: validarCPF(cpf)\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "dca64473-a5e1-4270-af80-dc2908f6404d",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        416,
+        0
+      ],
+      "id": "ab32c813-5953-4842-9968-13be6f1328d9",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "e5e56fce-d270-4218-90d3-842102cb7436",
+  "meta": {
+    "instanceId": "34f9105c66527f4f65c6f70d4e0616775ae03e0a7ecbacfcd8926dc5aad1c863"
+  },
+  "id": "9RVBjBMCFw8AYCcs",
+  "tags": []
+}
