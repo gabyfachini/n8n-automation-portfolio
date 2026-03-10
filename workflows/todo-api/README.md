@@ -1,20 +1,20 @@
 # ToDo API (n8n)
 
-API simples de lista de tarefas criada utilizando **n8n**.
+Simple **task management API** built using **n8n**.
 
-Este projeto demonstra como criar um **mini backend utilizando Webhooks e Workflow Static Data**.
-
----
-
-# Funcionalidades
-
-* Criar tarefas
-* Listar tarefas
-* Marcar tarefas como concluídas
+This project demonstrates how to create a **mini backend using Webhooks and Workflow Static Data**.
 
 ---
 
-# Tecnologias
+# Features
+
+* Create tasks
+* List tasks
+* Mark tasks as completed
+
+---
+
+# Technologies
 
 * n8n
 * Webhooks
@@ -23,13 +23,13 @@ Este projeto demonstra como criar um **mini backend utilizando Webhooks e Workfl
 
 ---
 
-# Estrutura da tarefa
+# Task Structure
 
 ```json
 {
-"id":1,
-"task":"Estudar n8n",
-"done":false
+  "id": 1,
+  "task": "Study n8n",
+  "done": false
 }
 ```
 
@@ -37,73 +37,79 @@ Este projeto demonstra como criar um **mini backend utilizando Webhooks e Workfl
 
 # Endpoints
 
-## Criar tarefa
+## Create Task
 
+```
 POST /webhook/task
+```
 
 Body:
 
 ```json
 {
-"task":"Estudar n8n"
+  "task": "Study n8n"
 }
 ```
 
-Resposta:
+Response:
 
 ```json
 {
-"id":1,
-"task":"Estudar n8n",
-"done":false
+  "id": 1,
+  "task": "Study n8n",
+  "done": false
 }
 ```
 
 ---
 
-## Listar tarefas
+## List Tasks
 
+```
 GET /webhook/tasks
+```
 
-Resposta:
+Response:
 
 ```json
 [
-{
-"id":1,
-"task":"Estudar n8n",
-"done":false
-}
+  {
+    "id": 1,
+    "task": "Study n8n",
+    "done": false
+  }
 ]
 ```
 
 ---
 
-## Marcar tarefa como concluída
+## Mark Task as Completed
 
+```
 POST /webhook/task/done
+```
 
 Body:
 
 ```json
 {
-"id":1
+  "id": 1
 }
 ```
 
-Resposta:
+Response:
 
 ```json
 {
-"id":1,
-"task":"Estudar n8n",
-"done":true
+  "id": 1,
+  "task": "Study n8n",
+  "done": true
 }
 ```
 
 ---
 
-# Estrutura do workflow
+# Workflow Structure
 
 ```
 Webhook
@@ -115,34 +121,9 @@ Respond to Webhook
 
 ---
 
-# Como testar
+# Future Improvements
 
-Exemplo usando curl:
-
-```
-curl -X POST http://localhost:5678/webhook-test/task \
--H "Content-Type: application/json" \
--d '{"task":"Estudar n8n"}'
-```
-
----
-
-# Estrutura do projeto
-
-```
-todo-api-n8n
-│
-├── create-task.json
-├── list-tasks.json
-├── complete-task.json
-└── README.md
-```
-
----
-
-# Melhorias futuras
-
-* Deletar tarefas
-* Atualizar tarefa
-* Buscar tarefa por ID
-* Persistir dados em banco de dados
+* Delete tasks
+* Update tasks
+* Search tasks by ID
+* Persist data in a database

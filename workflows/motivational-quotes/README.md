@@ -1,41 +1,46 @@
 # Motivational Quotes (n8n)
 
-Workflow simples no **n8n** que gera uma **frase motivacional aleatória todos os dias** e cria um **HTML com a frase e a data atual**.
+Simple **n8n workflow** that generates a **random motivational quote every day** and creates a **simple HTML page with the quote and the current date**.
 
 ---
 
-## Como funciona
+## How It Works
 
 ### 1. Schedule Trigger
-Executa automaticamente **todos os dias às 09:00**.
+
+Runs automatically **every day at 09:00 AM**.
 
 ### 2. Code (JavaScript)
-Seleciona uma frase motivacional aleatória de uma lista.
+
+Selects a random motivational quote from a predefined list.
 
 ### 3. Edit Fields
-Organiza os dados no formato:
 
-- `frase`
-- `Day of week`
-- `Month`
-- `Year`
+Organizes the data in the following format:
+
+* `quote`
+* `Day of week`
+* `Month`
+* `Year`
 
 ### 4. HTML
-Gera uma página HTML simples com:
 
-- frase centralizada
-- data abaixo da frase
+Generates a simple HTML page containing:
+
+* a centered quote
+* the date displayed below the quote
 
 ---
 
-## Exemplo de saída
+## Example Output
 
 ```json
 [
   {
-    "frase": "Consistência vence motivação.",
+    "quote": "Consistency beats motivation.",
     "Day of week": "Monday",
     "Month": "March",
     "Year": "2026"
   }
 ]
+```

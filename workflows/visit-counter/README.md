@@ -1,74 +1,72 @@
 # Visit Counter API (n8n)
 
-API simples que conta quantas vezes um endpoint foi acessado, criada utilizando **n8n** e **Webhooks**.
+Simple API that counts how many times an endpoint has been accessed, built using **n8n** and **Webhooks**.
 
-Cada requisição incrementa um contador armazenado no **Static Data do workflow**, permitindo acompanhar o número total de acessos.
-
-Este projeto demonstra como criar **um micro serviço simples usando n8n como backend**.
+Each request increments a counter stored in the **workflow Static Data**, allowing you to track the total number of visits.
 
 ---
 
-# 📌 Funcionalidades
+# Features
 
-* Contar acessos em um endpoint
-* Armazenar dados usando **Workflow Static Data**
-* Retornar número total de visitas
-* Criar um endpoint simples de API
+* Count accesses to an endpoint
+* Store data using **Workflow Static Data**
+* Return the total number of visits
+* Create a simple API endpoint
 
 ---
 
-# 🧠 Tecnologias utilizadas
+# Technologies Used
 
 * n8n
 * Webhooks
 * JavaScript
-* API REST
+* REST API
 
 ---
 
-# 🚀 Endpoint
+# Endpoint
 
-### Contar visita
+### Count Visit
 
 ```http
 GET /webhook/visit
 ```
 
-Cada chamada ao endpoint **incrementa o contador de visitas**.
+Each call to this endpoint **increments the visit counter**.
 
 ---
 
-# 📤 Exemplo de resposta
+# Example Response
 
-Primeira chamada:
+First request:
 
 ```json
 {
-  "visitas": 1
+  "visits": 1
 }
 ```
 
-Segunda chamada:
+Second request:
 
 ```json
 {
-  "visitas": 2
+  "visits": 2
 }
 ```
 
-Décima quinta chamada:
+Fifteenth request:
 
 ```json
 {
-  "visitas": 15
+  "visits": 15
 }
 ```
 
 ---
 
-# ⚙️ Estrutura do Workflow
+# Workflow Structure
 
-O workflow possui três nodes principais:
+The workflow contains three main nodes:
 
 ```
 Webhook
@@ -80,57 +78,35 @@ Respond to Webhook
 
 ### Webhook
 
-Recebe a requisição HTTP.
+Receives the HTTP request.
 
 ### Code Node
 
-Atualiza o contador armazenado no **Static Data** do workflow.
+Updates the counter stored in the workflow **Static Data**.
 
 ### Respond to Webhook
 
-Retorna o número total de visitas.
+Returns the total number of visits.
 
 ---
 
-# 🧩 Código utilizado
+# Testing the API
 
-```javascript
-const staticData = $getWorkflowStaticData('global');
+You can test it using **Postman**, **curl**, or a browser.
 
-if (!staticData.visitas) {
-  staticData.visitas = 0;
-}
-
-staticData.visitas += 1;
-
-return [
-  {
-    json: {
-      visitas: staticData.visitas
-    }
-  }
-];
-```
-
----
-
-# 🧪 Testando a API
-
-Você pode testar usando **Postman**, **curl** ou navegador.
-
-### URL (modo teste)
+### URL (test mode)
 
 ```
 GET http://localhost:5678/webhook-test/visit
 ```
 
-### URL (workflow ativo)
+### URL (active workflow)
 
 ```
 GET http://localhost:5678/webhook/visit
 ```
 
-### Exemplo com curl
+### Example using curl
 
 ```bash
 curl http://localhost:5678/webhook-test/visit
@@ -138,36 +114,9 @@ curl http://localhost:5678/webhook-test/visit
 
 ---
 
-# 📦 Importar no n8n
+# Import into n8n
 
-1. Baixe o arquivo `workflow.json`
-2. Abra o n8n
-3. Clique em **Import Workflow**
-4. Selecione o arquivo
-
----
-
-# 📁 Estrutura do projeto
-
-```
-visit-counter-n8n
-│
-├── workflow.json
-├── workflow.png
-└── README.md
-```
-
----
-
-# 💡 Possíveis melhorias
-
-* Registrar endereço IP da visita
-* Armazenar histórico de acessos
-* Contar visitas por endpoint
-* Criar painel de estatísticas
-
----
-
-# 👨‍💻 Objetivo do projeto
-
-Este projeto foi criado para estudo
+1. Download the `workflow.json` file
+2. Open **n8n**
+3. Click **Import Workflow**
+4. Select the file

@@ -1,34 +1,31 @@
 # CPF Validator API (n8n)
 
-API simples para validação básica de CPF criada utilizando **n8n** e **Webhooks**.
-
-Este projeto demonstra como criar um **mini endpoint de API** dentro do n8n usando JavaScript para validar entradas recebidas via HTTP.
+Simple API for basic CPF validation built using **n8n** and **Webhooks**.
 
 ---
 
-# 📌 Funcionalidades
+# Features
 
-* Recebe um CPF via requisição HTTP
-* Remove caracteres não numéricos
-* Verifica se o CPF possui **11 dígitos**
-* Retorna se o CPF é válido ou não
+* Receives a CPF through an HTTP request
+* Removes non-numeric characters
+* Checks if the CPF has **11 digits**
+* Returns whether the CPF is valid or not
 
-⚠️ Esta validação é **básica**, verificando apenas o formato do CPF.
+⚠️ This validation is **basic**, verifying only the CPF format.
 
 ---
 
-# 🧠 Tecnologias
+# Technologies
 
 * n8n
 * Webhooks
 * JavaScript
-* API REST
 
 ---
 
-# 🚀 Endpoint
+# Endpoint
 
-### Validar CPF
+### Validate CPF
 
 ```
 POST /webhook/validar-cpf
@@ -36,13 +33,7 @@ POST /webhook/validar-cpf
 
 ---
 
-# 📥 Request
-
-### Headers
-
-```
-Content-Type: application/json
-```
+# Request
 
 ### Body
 
@@ -54,20 +45,20 @@ Content-Type: application/json
 
 ---
 
-# 📤 Response
+# Response
 
 ```json
 {
   "cpf": "12345678901",
-  "valido": false
+  "valid": false
 }
 ```
 
 ---
 
-# ⚙️ Estrutura do Workflow
+# Workflow Structure
 
-O workflow é composto por três nodes principais:
+The workflow consists of three main nodes:
 
 ```
 Webhook
@@ -79,94 +70,30 @@ Respond to Webhook
 
 ### Webhook
 
-Recebe a requisição HTTP contendo o CPF.
+Receives the HTTP request containing the CPF.
 
 ### Code Node
 
-Executa a validação do CPF utilizando JavaScript.
+Runs the CPF validation using JavaScript.
 
 ### Respond to Webhook
 
-Retorna o resultado da validação.
+Returns the validation result.
 
 ---
 
-# 🧩 Código de validação
+# Import into n8n
 
-```javascript
-function validarCPF(cpf) {
-
-  if (!cpf) return false;
-
-  cpf = cpf.replace(/[^\d]+/g,'');
-
-  if (cpf.length !== 11) return false;
-
-  return true;
-}
-
-const cpf = $json.body.cpf;
-
-return [
-  {
-    json: {
-      cpf: cpf,
-      valido: validarCPF(cpf)
-    }
-  }
-];
-```
+1. Download the `workflow.json` file
+2. Open **n8n**
+3. Click **Import Workflow**
+4. Select the JSON file
 
 ---
 
-# 🧪 Testando com Postman
+# Future Improvements
 
-### URL
-
-```
-POST http://localhost:5678/webhook-test/validar-cpf
-```
-
-### Body
-
-```json
-{
-  "cpf": "12345678901"
-}
-```
-
----
-
-# 📦 Importar no n8n
-
-1. Baixe o arquivo `workflow.json`
-2. Abra o n8n
-3. Clique em **Import Workflow**
-4. Selecione o arquivo JSON
-
----
-
-# 📁 Estrutura do Projeto
-
-```
-cpf-validator-n8n
-│
-├── workflow.json
-├── workflow.png
-└── README.md
-```
-
----
-
-# 💡 Melhorias futuras
-
-* Validação completa de CPF (dígitos verificadores)
-* API para validação de CNPJ
-* API para validação de CEP
-* Agrupar em uma **Brazilian Validation API**
-
----
-
-# 👨‍💻 Autor
-
-Projeto criado para estudo de **automação e criação de APIs utilizando n8n**.
+* Full CPF validation (verification digits)
+* API for CNPJ validation
+* API for CEP validation
+* Combine into a **Brazilian Validation API**

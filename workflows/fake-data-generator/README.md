@@ -1,59 +1,56 @@
 # Fake Data Generator API (n8n)
 
-API simples para geração de **dados fictícios aleatórios** usando **n8n**.
-Ideal para **testes de APIs, mocks de frontend e desenvolvimento de aplicações**.
+Simple API for generating **random fake data** using **n8n**.
 
-O workflow recebe uma requisição HTTP e retorna um usuário com **nome, cidade e idade aleatórios**.
-
----
-
-# 📌 Funcionalidades
-
-* Geração de dados fake aleatórios
-* Ideal para testes de APIs
-* Retorno em formato JSON
-* Endpoint simples via Webhook
+The workflow receives an HTTP request and returns a user with **random name, city, and age**.
 
 ---
 
-# 🧠 Tecnologias utilizadas
+# Features
+
+* Random fake data generation
+* JSON response format
+* Simple endpoint using Webhooks
+
+---
+
+# Technologies Used
 
 * n8n
 * Webhooks
 * JavaScript
-* API REST
 
 ---
 
-# 🚀 Endpoint
+# Endpoint
 
-### Gerar dados fake
+### Generate Fake Data
 
-```http id="fake02"
+```http
 GET /webhook/fake-user
 ```
 
 ---
 
-# 📤 Exemplo de resposta
+# Example Response
 
-```json id="fake03"
+```json
 {
-  "nome": "Marina",
-  "cidade": "Curitiba",
-  "idade": 29
+  "name": "Marina",
+  "city": "Curitiba",
+  "age": 29
 }
 ```
 
-Cada requisição gera **um conjunto diferente de dados**.
+Each request generates **a different set of data**.
 
 ---
 
-# ⚙️ Estrutura do Workflow
+# Workflow Structure
 
-O workflow possui três nodes principais:
+The workflow has three main nodes:
 
-```text id="fake04"
+```text
 Webhook
    ↓
 Code (JavaScript)
@@ -63,86 +60,42 @@ Respond to Webhook
 
 ### Webhook
 
-Recebe a requisição HTTP.
+Receives the HTTP request.
 
 ### Code Node
 
-Gera dados aleatórios usando JavaScript.
+Generates random data using JavaScript.
 
 ### Respond to Webhook
 
-Retorna o JSON gerado para quem chamou a API.
+Returns the generated JSON to whoever called the API.
 
 ---
 
-# 🧩 Código utilizado
+# Testing the API
 
-```javascript id="fake05"
-const nomes = ["Ana","Carlos","Marina","Pedro"];
-const cidades = ["São Paulo","Rio","Curitiba","Recife"];
-
-return [
-  {
-    json: {
-      nome: nomes[Math.floor(Math.random()*nomes.length)],
-      cidade: cidades[Math.floor(Math.random()*cidades.length)],
-      idade: Math.floor(Math.random()*60) + 18
-    }
-  }
-];
-```
+You can test the API using **Postman**, **curl**, or a browser.
 
 ---
 
-# 🧪 Testando a API
+# Importing into n8n
 
-Você pode testar usando **Postman**, **curl** ou navegador.
-
-### URL
-
-```http id="fake06"
-GET http://localhost:5678/webhook-test/fake-user
-```
-
-### Exemplo com curl
-
-```bash id="fake07"
-curl http://localhost:5678/webhook-test/fake-user
-```
+1. Download the `workflow.json` file
+2. Open **n8n**
+3. Click **Import Workflow**
+4. Select the workflow file
 
 ---
 
-# 📦 Importar no n8n
+# Possible Improvements
 
-1. Baixe o arquivo `workflow.json`
-2. Abra o n8n
-3. Clique em **Import Workflow**
-4. Selecione o arquivo do workflow
-
----
-
-# 📁 Estrutura do projeto
-
-```text id="fake08"
-fake-data-generator-n8n
-│
-├── workflow.json
-├── workflow.png
-└── README.md
-```
+* Add last name
+* Add fake email
+* Generate multiple users
+* Generate company data
 
 ---
 
-# 💡 Possíveis melhorias
+# Project Purpose
 
-* Adicionar sobrenome
-* Adicionar email fake
-* Gerar múltiplos usuários
-* Gerar dados de empresa
-* Criar parâmetros de quantidade (`/fake-user?count=10`)
-
----
-
-# 👨‍💻 Objetivo do projeto
-
-Este projeto foi criado para estudo de **automação e criação de APIs utilizando n8n**, demonstrando como criar **micro serviços simples sem backend tradicional**.
+This project was created to study **automation and API development using n8n**.
