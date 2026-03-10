@@ -7,7 +7,7 @@ API simples construída com **n8n** que gera uma **senha aleatória segura** uti
 # Endpoint
 
 ```
-POST /webhook/password
+POST /webhook/password-generator
 ```
 
 ---

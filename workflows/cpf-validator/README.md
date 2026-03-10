@@ -28,7 +28,7 @@ Simple API for basic CPF validation built using **n8n** and **Webhooks**.
 ### Validate CPF
 
 ```
-POST /webhook/validar-cpf
+POST /webhook/cpf-validator
 ```
 
 ---

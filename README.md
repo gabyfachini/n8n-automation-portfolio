@@ -15,7 +15,7 @@ Simple API that generates **secure random passwords**.
 Endpoint:
 
 ```
-GET /webhook/password
+GET /webhook/password-generator
 ```
 
 Example response:
@@ -71,7 +71,7 @@ Webhook that counts how many times the API has been accessed using **Workflow St
 Endpoint:
 
 ```
-GET /visit
+GET /visit-counter
 ```
 
 Response:
@@ -91,7 +91,7 @@ Simple API that validates the **format of a Brazilian CPF number**.
 Endpoint:
 
 ```
-POST /validar-cpf
+POST /cpf-validator
 ```
 
 Input body:

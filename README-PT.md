@@ -71,7 +71,7 @@ Webhook que conta quantas vezes a API foi acessada utilizando **Workflow Static 
 Endpoint:
 
 ```
-GET /visit
+GET /visit-counter
 ```
 
 Resposta:

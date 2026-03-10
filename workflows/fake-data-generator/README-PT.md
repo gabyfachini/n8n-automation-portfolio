@@ -27,7 +27,7 @@ O workflow recebe uma requisição HTTP e retorna um usuário com **nome, cidade
 ### Gerar dados fake
 
 ```http id="fake02"
-GET /webhook/fake-user
+GET /webhook/fake-data-generator
 ```
 
 ---

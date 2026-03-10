@@ -3,7 +3,7 @@
   "nodes": [
     {
       "parameters": {
-        "path": "gerar-senha",
+        "path": "password-generator",
         "responseMode": "responseNode",
         "options": {}
       },

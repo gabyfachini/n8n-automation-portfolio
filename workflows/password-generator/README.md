@@ -7,7 +7,7 @@ Simple API built with **n8n** that generates a **secure random password** using 
 # Endpoint
 
 ```
-POST /webhook/password
+POST /webhook/password-generator
 ```
 
 ---

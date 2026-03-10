@@ -27,7 +27,7 @@ The workflow receives an HTTP request and returns a user with **random name, cit
 ### Generate Fake Data
 
 ```http
-GET /webhook/fake-user
+GET /webhook/fake-data-generator
 ```
 
 ---

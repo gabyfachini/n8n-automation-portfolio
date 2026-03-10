@@ -29,7 +29,7 @@ Each request increments a counter stored in the **workflow Static Data**, allowi
 ### Count Visit
 
 ```http
-GET /webhook/visit
+GET /webhook/visit-counter
 ```
 
 Each call to this endpoint **increments the visit counter**.
@@ -97,19 +97,19 @@ You can test it using **Postman**, **curl**, or a browser.
 ### URL (test mode)
 
 ```
-GET http://localhost:5678/webhook-test/visit
+GET http://localhost:5678/webhook-test/visit-counter
 ```
 
 ### URL (active workflow)
 
 ```
-GET http://localhost:5678/webhook/visit
+GET http://localhost:5678/webhook/visit-counter
 ```
 
 ### Example using curl
 
 ```bash
-curl http://localhost:5678/webhook-test/visit
+curl http://localhost:5678/webhook-test/visit-counter
 ```
 
 ---
